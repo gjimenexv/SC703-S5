@@ -1,5 +1,6 @@
 package com.example.taller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
@@ -32,8 +33,11 @@ public class Principal extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), EstudianteActivity.class);
+
+                intent.putExtra("tipo", 2); // 2 es agregar / cancelar
+
+                startActivity(intent);// presenta pantalla
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -51,7 +55,7 @@ public class Principal extends AppCompatActivity {
         AdminDB data = new AdminDB(getApplicationContext(),
                 "base.db",
                 null,
-                1);
+                2);
 
         EstudianteGestion.init(data);
     }

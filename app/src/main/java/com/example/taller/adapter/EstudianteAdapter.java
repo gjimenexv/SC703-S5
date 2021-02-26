@@ -9,24 +9,40 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.taller.R;
+import com.example.taller.gestion.EstudianteGestion;
 import com.example.taller.model.Estudiante;
 
 import java.util.List;
 
-public class EstudianteAdapter extends RecyclerView.Adapter<EstudianteAdapter.EstudianteViewHolder> {
+public class EstudianteAdapter extends RecyclerView.Adapter<EstudianteAdapter.EstudianteViewHolder> implements View.OnClickListener{
 
     private List<Estudiante> lista;
+    private View.OnClickListener listener;
+
+    public void setListener(View.OnClickListener listener) {
+        this.listener = listener;
+    }
 
     public EstudianteAdapter(List<Estudiante> lista) {
         this.lista = lista;
     }
+    public void refresh(){
+        lista = EstudianteGestion.getEstudiante();
+    }
 
+    @Override
+    public void onClick(View v) {
+        if (listener != null){
+            listener.onClick(v);
+        }
+    }
 
 
     @NonNull
     @Override
     public EstudianteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View vista = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_estudiante, parent, false);
+        vista.setOnClickListener(this);
         return new EstudianteViewHolder(vista);
     }
 
@@ -39,7 +55,7 @@ public class EstudianteAdapter extends RecyclerView.Adapter<EstudianteAdapter.Es
 
     @Override
     public int getItemCount() {
-        return 0;
+        return lista.size();
     }
 
     public class EstudianteViewHolder extends RecyclerView.ViewHolder {

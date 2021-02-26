@@ -1,9 +1,11 @@
 package com.example.taller.model;
 
+import java.io.Serializable;
+
 //Es una clase POJO -Plain Old Java Object-
 //Usada para mapear una tabla de SQLite en el sistema
 //sólo tiene atributos, contructores, sets y gets
-public class Estudiante {
+public class Estudiante implements Serializable {
     private int id;
     private String nombre;
     private int edad;
